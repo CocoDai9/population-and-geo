@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tibet: Population vs. Topography</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f4f4f4;
+            padding: 40px;
+            color: #333;
+        }
+
+        h1 { margin-bottom: 5px; }
+        p.subtitle { color: #666; margin-bottom: 30px; font-size: 1.1em; }
+
+        /* Container for the maps */
+        .map-container {
+            position: relative;
+            /* Adjust these dimensions to match your Population Map image ratio */
+            width: 800px; 
+            height: 600px; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            background-color: white;
+            border: 5px solid #fff;
+        }
+
+        /* Common style for both images */
+        .map-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* This ensures the image fills the box */
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        /* Topography Map (Bottom Layer) */
+        .topo-layer {
+            z-index: 1;
+        }
+
+        /* Population Map (Top Layer) */
+        .pop-layer {
+            z-index: 2;
+            opacity: 1; /* Visible by default */
+        }
+
+        /* INTERACTION: When clicking/holding the container, hide the population map */
+        .map-container:active .pop-layer {
+            opacity: 0;
+        }
+
+        /* Instruction Badge */
+        .instruction-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 30px;
+            pointer-events: none; /* Let clicks pass through to the map */
+            font-weight: bold;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 850px) {
+            .map-container {
+                width: 100%;
+                height: 50vw; /* Keep aspect ratio on mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Tibet Population Distribution</h1>
+    <p class="subtitle">Visualizing the correlation between terrain and settlement</p>
+
+    <div class="map-container">
+        <div class="instruction-badge">👆 Hold Click to View Terrain</div>
+        
+        <img src="topo.jpg" alt="Topography" class="map-layer topo-layer">
+
+        <img src="pop.jpg" alt="Population" class="map-layer pop-layer">
+    </div>
+
+</body>
+</html>
